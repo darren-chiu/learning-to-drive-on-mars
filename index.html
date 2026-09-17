@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Learning to Drive on Mars</title>
+
+    <!-- Favicon: swap for assets/favicon.ico if you have one -->
+    <link rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚗</text></svg>"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
+
+    <!-- Social preview (Open Graph). Update url/image after deploy. -->
+    <meta property="og:title" content="Learning to Drive on Mars"/>
+    <meta property="og:description" content="Project page for our ICRA submission."/>
+    <meta property="og:type" content="website"/>
+    <!-- <meta property="og:image" content="https://darren-chiu.github.io/learning-to-drive-on-mars/figures/teaser.png"/> -->
+
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        WebFont.load({
+          google: {
+            families: [
+              "Lato:100,100italic,300,300italic,400,400italic,700,700italic,900,900italic",
+              "Open Sans:300,400,600,700",
+            ],
+          },
+        });
+    </script>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+          rel="stylesheet" type="text/css"/>
+    <!-- Tabler icons (used in the link buttons) -->
+    <link href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css"
+          rel="stylesheet"/>
+    <!-- Slick carousel (used for the top video row) -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+
+    <!-- KaTeX for math (optional; use $...$ or $$...$$ in the text) -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"
+          crossorigin="anonymous"/>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          renderMathInElement(document.body, {
+            delimiters: [
+              { left: "$$", right: "$$", display: true },
+              { left: "$", right: "$", display: false },
+              { left: "\\(", right: "\\)", display: false },
+              { left: "\\[", right: "\\]", display: true },
+            ],
+            throwOnError: false,
+          });
+        });
+    </script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script>
+        $(document).ready(function () {
+          $('.your-class').slick({
+            dots: true,
+            infinite: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 4000,
+            arrows: true,
+          });
+        });
+    </script>
+</head>
+
+<body>
+
+<!-- ============================= TITLE ============================= -->
+<h1 style="font-family: Lato; margin: 0.25em 0">
+    Learning to Drive on Mars
+</h1>
+
+<div style="height: 0.5em"></div>
+
+<!-- ============================= AUTHORS ============================= -->
+<!-- TODO: replace names, links, and affiliation superscripts. -->
+<div style="display: flex; flex-wrap: wrap; text-align: center; justify-content: center;
+            gap: 0.4em 1.25em; max-width: 50em; margin: 0 auto; font-weight: 300;">
+    <div>
+        <a href="https://darren-chiu.github.io/" target="_blank" style="color:#D48859">Darren Chiu<sup>1</sup></a>
+        <div style="width: 1em; display: inline-block"></div>
+        <a href="#" target="_blank" style="color:#7EA8DA">Author Two<sup>1</sup></a>
+        <div style="width: 1em; display: inline-block"></div>
+        <a href="#" target="_blank" style="color:#A1B355">Author Three<sup>2</sup></a>
+    </div>
+</div>
+
+<div style="height: 1em"></div>
+
+<!-- ============================= AFFILIATIONS ============================= -->
+<div style="display: flex; justify-content: center; gap: 2em;
+            max-width: 30em; margin: 0 auto; font-weight: 400;">
+    <div style="margin-bottom: 10px;">Your University<sup>1</sup></div>
+    <div style="margin-bottom: 10px;">Second Institution<sup>2</sup></div>
+</div>
+
+<div style="height: 0.5em"></div>
+
+<!-- Conference / status line (optional) -->
+<div style="text-align:center; font-weight:400;">Submitted to ICRA 2026</div>
+
+<div style="height: 1em"></div>
+
+<!-- ============================= LINKS ============================= -->
+<!-- TODO: fill in arXiv id, video url, pdf path. Delete buttons you don't need. -->
+<div style="display: flex; justify-content: center; gap: 0.5em 1em; flex-wrap: wrap;">
+    <a href="https://arxiv.org/abs/XXXX.XXXXX" target="_blank">
+        <button><i class="ti ti-article"></i> arXiv</button>
+    </a>
+    <a href="assets/paper.pdf" target="_blank">
+        <button><i class="ti ti-file-text"></i> paper</button>
+    </a>
+    <a href="https://youtu.be/XXXXXXXX" target="_blank">
+        <button><i class="ti ti-video"></i> video</button>
+    </a>
+    <a href="https://github.com/darren-chiu/learning-to-drive-on-mars" target="_blank">
+        <button><i class="ti ti-brand-github"></i> code</button>
+    </a>
+</div>
+
+<!-- ============================= TLDR ============================= -->
+<div style="height: 1em"></div>
+<p style="text-align: center; margin: 0 auto; flex-wrap: wrap; display: flex;
+          justify-content: center; max-width: 50em;">
+    <strong>TLDR</strong>
+    <br>
+    <em>
+        One-sentence summary of the paper goes here — the elevator pitch a reader
+        should walk away with after 5 seconds on the page.<br/>
+    </em>
+</p>
+<div style="height: 1.3em"></div>
+
+<!-- ============================= TEASER VIDEO CAROUSEL ============================= -->
+<!-- Drop mp4s into results/ and update the <source> paths. Add/remove .video_class blocks freely. -->
+<section>
+    <div class="your-class">
+        <div class="video_class w-embed">
+            <video width=100% height=100% autoplay muted controls loop playsinline preload="metadata"
+                   style="border-radius:10px;">
+                <source src="results/teaser-1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="video_class w-embed">
+            <video width=100% height=100% autoplay muted controls loop playsinline preload="metadata"
+                   style="border-radius:10px;">
+                <source src="results/teaser-2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <div style="height: 1.2em"></div>
+
+    <!-- ABSTRACT -->
+    <p>
+        Replace this with your paper's abstract. This paragraph sits directly under the
+        teaser videos, mirroring the reference template. Keep it to the abstract text —
+        method details and results go in the sections below.
+    </p>
+</section>
+
+<!-- ============================= OVERVIEW ============================= -->
+<section>
+    <h2>Overview</h2>
+    <div class="small-div"></div>
+    <p>
+        A short paragraph describing the setup / problem at a high level. The figure below
+        shows the system overview.
+    </p>
+    <!-- Place figures/fig1.png; the id makes it responsive (hides on very small screens). -->
+    <img src="figures/fig1.png" id="tilted-method" alt="Overview figure"/>
+</section>
+
+<div style="height: 0.3em"></div>
+
+<!-- ============================= METHOD ============================= -->
+<section>
+    <h2>Method</h2>
+    <div class="small-div"></div>
+    <p>
+        Describe your method and contributions here.
+    </p>
+    <img src="figures/fig2.png" id="tilted-method" alt="Method figure"/>
+</section>
+
+<div style="height: 0.3em"></div>
+
+<!-- ============================= RESULTS (paired video grid) ============================= -->
+<section>
+    <h2>Results</h2>
+
+    <div class="small-div"></div>
+    <div class="row no-gutters">
+        <div class="col">
+            <center><video playsinline autoplay loop muted src="results/result-1.mp4" width="98%"
+                           preload="metadata" style="border-radius:10px;"></video></center>
+        </div>
+        <div class="col">
+            <center><video playsinline autoplay loop muted src="results/result-2.mp4" width="98%"
+                           preload="metadata" style="border-radius:10px;"></video></center>
+        </div>
+    </div>
+    <div class="small-div"></div>
+    <p>
+        Caption describing the two videos above.
+    </p>
+
+    <div class="content-div"></div>
+
+    <h2>Robustness</h2>
+    <div class="small-div"></div>
+    <div class="row no-gutters">
+        <div class="col">
+            <center><video playsinline autoplay loop muted src="results/robust-1.mp4" width="98%"
+                           preload="metadata" style="border-radius:10px;"></video></center>
+        </div>
+        <div class="col">
+            <center><video playsinline autoplay loop muted src="results/robust-2.mp4" width="98%"
+                           preload="metadata" style="border-radius:10px;"></video></center>
+        </div>
+    </div>
+    <div class="small-div"></div>
+    <p>
+        Caption describing robustness experiments.
+    </p>
+</section>
+
+<!-- ============================= BIBTEX ============================= -->
+<div class="small-div"></div>
+<section>
+    <h2>BibTeX</h2>
+    <div class="small-div"></div>
+    <pre style="font-size: 15px; background-color: #f4f4f4; padding: 1em; border-radius: 8px; overflow-x: auto;">
+@article{chiu2026mars,
+  author  = {Chiu, Darren and Author, Two and Author, Three},
+  title   = {Learning to Drive on Mars},
+  journal = {arXiv:XXXX.XXXXX},
+  year    = {2026}
+}
+    </pre>
+</section>
+
+<!-- ============================= ACKNOWLEDGEMENTS ============================= -->
+<section>
+    <h2>Acknowledgements</h2>
+    <div class="small-div"></div>
+    <p>
+        Acknowledgements go here.
+    </p>
+</section>
+
+<center><em>Website template adapted from
+    <a href="https://toruowo.github.io/recipe/" target="_blank">Recipe</a> /
+    <a href="https://toruowo.github.io/hato/" target="_blank">HATO</a>.</em></center>
+<br>
+
+</body>
+</html>
