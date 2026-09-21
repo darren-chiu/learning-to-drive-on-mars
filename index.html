@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>Learning to Drive on Mars</title>
+    <title>Learning to Drive on Mars: Visual Multimodal Traversability Estimation for Off-World Navigation</title>
 
     <!-- Favicon: swap for assets/favicon.ico if you have one -->
     <link rel="icon"
@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
 
     <!-- Social preview (Open Graph). Update url/image after deploy. -->
-    <meta property="og:title" content="Learning to Drive on Mars"/>
+    <meta property="og:title" content="Learning to Drive on Mars: Visual Multimodal Traversability Estimation for Off-World Navigation"/>
     <meta property="og:description" content="Project page for our ICRA submission."/>
     <meta property="og:type" content="website"/>
     <!-- <meta property="og:image" content="https://darren-chiu.github.io/learning-to-drive-on-mars/figures/teaser.png"/> -->
@@ -69,14 +69,46 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script>
         $(document).ready(function () {
-          $('.your-class').slick({
+          var $carousel = $('.your-class');
+          var endedCount = 0;
+
+          // Play every video in the visible group; pause/reset the rest.
+          function playActive() {
+            endedCount = 0;
+            $carousel.find('video').each(function () {
+              this.pause();
+            });
+            $carousel.find('.slick-active video').each(function () {
+              this.currentTime = 0;
+              this.play().catch(function () {});
+            });
+          }
+
+          $carousel.on('init', function () { playActive(); });
+
+          $carousel.slick({
             dots: true,
             infinite: true,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 4000,
+            slidesToShow: 4,       // 4 videos per slide
+            slidesToScroll: 4,
+            autoplay: false,       // advance when the group finishes, not on a timer
             arrows: true,
+            responsive: [
+              { breakpoint: 900, settings: { slidesToShow: 2, slidesToScroll: 2 } },
+              { breakpoint: 600, settings: { slidesToShow: 1, slidesToScroll: 1 } },
+            ],
+          });
+
+          // Play the newly-shown group after each slide change.
+          $carousel.on('afterChange', function () { playActive(); });
+
+          // Advance to the next group once every visible video has finished.
+          $carousel.find('video').on('ended', function () {
+            endedCount++;
+            var visible = $carousel.find('.slick-active video').length;
+            if (endedCount >= visible) {
+              $carousel.slick('slickNext');
+            }
           });
         });
     </script>
@@ -85,8 +117,9 @@
 <body>
 
 <!-- ============================= TITLE ============================= -->
-<h1 style="font-family: Lato; margin: 0.25em 0">
-    Learning to Drive on Mars
+<h1 style="font-family: Lato; margin: 0.25em 0; font-size: 2.0em;">
+    <b>Learning to Drive on Mars</b>:<br>
+    Visual Multimodal Traversability Estimation for Off-World Navigation
 </h1>
 
 <div style="height: 0.5em"></div>
@@ -94,13 +127,17 @@
 <!-- ============================= AUTHORS ============================= -->
 <!-- TODO: replace names, links, and affiliation superscripts. -->
 <div style="display: flex; flex-wrap: wrap; text-align: center; justify-content: center;
-            gap: 0.4em 1.25em; max-width: 50em; margin: 0 auto; font-weight: 300;">
+            gap: 0.4em 1.25em; max-width: 50em; margin: 0 auto; font-weight: 300;font-size: 1.3em;">
     <div>
-        <a href="https://darren-chiu.github.io/" target="_blank" style="color:#D48859">Darren Chiu<sup>1</sup></a>
+        <a href="https://darren-chiu.github.io/" target="_blank" style="color:#407dc7">Darren Chiu<sup>1,3</sup></a>
         <div style="width: 1em; display: inline-block"></div>
-        <a href="#" target="_blank" style="color:#7EA8DA">Author Two<sup>1</sup></a>
+        <a href="https://cole.ws" target="_blank" style="color:#407dc7">Cole Wilson<sup>2,3</sup></a>
         <div style="width: 1em; display: inline-block"></div>
-        <a href="#" target="_blank" style="color:#A1B355">Author Three<sup>2</sup></a>
+        <a href="https://github.com/Kronos3" target="_blank" style="color:#407dc7">Andrei Tumbar<sup>3</sup></a>
+        <div style="width: 1em; display: inline-block"></div>
+        <a href="https://viterbi.usc.edu/directory/faculty/Sukhatme/Gaurav" target="_blank" style="color:#407dc7">Gaurav S. Sukhatme<sup>1</sup></a>
+        <div style="width: 1em; display: inline-block"></div>
+        <a href="https://stevenmyint.com" target="_blank" style="color:#407dc7">Steven Myint<sup>3</sup></a>
     </div>
 </div>
 
@@ -108,63 +145,216 @@
 
 <!-- ============================= AFFILIATIONS ============================= -->
 <div style="display: flex; justify-content: center; gap: 2em;
-            max-width: 30em; margin: 0 auto; font-weight: 400;">
-    <div style="margin-bottom: 10px;">Your University<sup>1</sup></div>
-    <div style="margin-bottom: 10px;">Second Institution<sup>2</sup></div>
+            max-width: 300em; margin: 0 auto; font-weight: 400;">
+    <div style="margin-bottom: 10px;">University of Southern California<sup>1</sup></div>
+    <div style="margin-bottom: 10px;">Washington State University<sup>2</sup></div>
+    <div style="margin-bottom: 10px;">NASA Jet Propulsion Laboratory<sup>3</sup></div>
 </div>
 
-<div style="height: 0.5em"></div>
+<div style="height: 0.2em"></div>
+
+<!-- ============================= INSTITUTION LOGOS ============================= -->
+<!-- Drop the logos into assets/ (transparent PNG or SVG). Wrap each in a link if desired. -->
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+            gap: 0.5em 1.em; max-width: 55em; margin: -1.5em auto;">
+    <a href="https://www.usc.edu/" target="_blank">
+        <img src="assets/logo-usc.png" alt="University of Southern California"
+             style="height: 10em; width: auto; object-fit: contain;"/>
+    </a>
+        <a href="https://wsu.edu//" target="_blank">
+        <img src="assets/logo-wsu.png" alt="Washington State University"
+             style="height: 7em; width: auto; object-fit: contain;"/>
+    </a>
+    <a href="https://www.jpl.nasa.gov/" target="_blank">
+        <img src="assets/logo-jpl.png" alt="NASA Jet Propulsion Laboratory"
+             style="height: 5em; width: auto; object-fit: contain;"/>
+    </a>
+</div>
+
+<div style="height: 0.2em"></div>
 
 <!-- Conference / status line (optional) -->
-<div style="text-align:center; font-weight:400;">Submitted to ICRA 2026</div>
+<div style="text-align:center;font-size: large; font-weight:800;">Under Review</div>
 
-<div style="height: 1em"></div>
+<div style="height: 2em"></div>
 
 <!-- ============================= LINKS ============================= -->
-<!-- TODO: fill in arXiv id, video url, pdf path. Delete buttons you don't need. -->
+<!-- TODO: fill in paper url (arXiv or ICRA proceedings) and code repo. -->
 <div style="display: flex; justify-content: center; gap: 0.5em 1em; flex-wrap: wrap;">
-    <a href="https://arxiv.org/abs/XXXX.XXXXX" target="_blank">
-        <button><i class="ti ti-article"></i> arXiv</button>
-    </a>
-    <a href="assets/paper.pdf" target="_blank">
-        <button><i class="ti ti-file-text"></i> paper</button>
-    </a>
-    <a href="https://youtu.be/XXXXXXXX" target="_blank">
-        <button><i class="ti ti-video"></i> video</button>
-    </a>
     <a href="https://github.com/darren-chiu/learning-to-drive-on-mars" target="_blank">
         <button><i class="ti ti-brand-github"></i> code</button>
     </a>
+    <a href="https://arxiv.org/abs/XXXX.XXXXX" target="_blank">
+        <button><i class="ti ti-file-text"></i> paper</button>
+    </a>
+    <!-- Data: coming soon. Disabled until the link is ready. -->
+    <button disabled style="opacity: 0.5; cursor: default;">
+        <i class="ti ti-database"></i> data (coming soon)
+    </button>
+    <!-- BibTeX toggle: shows/hides the citation block below. -->
+    <button onclick="toggleBibtex()">
+        <i class="ti ti-quote"></i> bibtex
+    </button>
 </div>
 
+<!-- BibTeX block, hidden until the button is clicked. -->
+<div id="bibtex-block" style="display: none; max-width: 50em; margin: 1em auto 0;">
+    <pre style="font-size: 14px; background-color: #f4f4f4; padding: 1em 1.25em;
+                border-radius: 8px; overflow-x: auto; text-align: left; line-height: 1.4em;">
+@inproceedings{chiu2026mars,
+  author    = {Chiu, Darren and Wilson, Cole and Tumbar, Andrei and Sukhatme, Gaurav S. and Myint, Steven},
+  title     = {Learning to Drive on Mars: Visual Multimodal Traversability Estimation for Off-World Navigation},
+  booktitle = {IEEE International Conference on Robotics and Automation (ICRA)},
+  year      = {2026}
+}</pre>
+</div>
+
+<script>
+    function toggleBibtex() {
+      var el = document.getElementById("bibtex-block");
+      el.style.display = (el.style.display === "none") ? "block" : "none";
+    }
+</script>
+
+<!-- ============================= FEATURED / SUPPLEMENTARY VIDEO ============================= -->
+<!-- Main hero video. Drop the file into results/ and update the <source> path.
+     Autoplay requires muted; keep controls so viewers can unmute + scrub. -->
+<div style="height: 1.2em"></div>
+<section>
+    <video width="100%" height="100%" autoplay muted controls loop playsinline preload="metadata"
+           poster="figures/Hero.png" style="border-radius:10px; display:block;">
+        <source src="results/learning_to_drive_on_mars_supplementary.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</section>
+
 <!-- ============================= TLDR ============================= -->
-<div style="height: 1em"></div>
+<!-- <div style="height: 1em"></div>
 <p style="text-align: center; margin: 0 auto; flex-wrap: wrap; display: flex;
           justify-content: center; max-width: 50em;">
     <strong>TLDR</strong>
     <br>
     <em>
-        One-sentence summary of the paper goes here — the elevator pitch a reader
-        should walk away with after 5 seconds on the page.<br/>
+        A contrastiv<br/>
     </em>
 </p>
-<div style="height: 1.3em"></div>
+<div style="height: 1.3em"></div> -->
 
-<!-- ============================= TEASER VIDEO CAROUSEL ============================= -->
-<!-- Drop mp4s into results/ and update the <source> paths. Add/remove .video_class blocks freely. -->
+<!-- ============================= DATASET CAROUSEL (wheeltracks by Sol) ============================= -->
+<!-- One panel per video in results/wheeltracks/, titled with its Sol number.
+     To add a Sol, copy a .video_class block and update the <source> path + title. -->
+<div style="height: 1.5em"></div>
 <section>
+    <h2>The Mars 2020 Perseverance Dataset</h2>
+    
+    <div class="small-div"></div>
+    <!-- <p style="text-align:center;"> -->
+        Each sol contains a sequence of grayscale image pairs, acceleration readings, rocker-bogie angles, tilt, and slip estimates. The grayscale image pairs are generated once every $1m$ of driving whereas pose and proprioception is collected at approximately $8 \ hz$.
+    </p>
+    <div class="small-div"></div>
+
     <div class="your-class">
         <div class="video_class w-embed">
-            <video width=100% height=100% autoplay muted controls loop playsinline preload="metadata"
+            <div style="text-align:center; font-weight:600; margin-bottom:0.4em;">Sol 203</div>
+            <video width=100% height=100% muted controls loop playsinline preload="metadata"
                    style="border-radius:10px;">
-                <source src="results/teaser-1.mp4" type="video/mp4">
+                <source src="results/wheeltracks/sol00203_wheeltracks_slip.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
         <div class="video_class w-embed">
-            <video width=100% height=100% autoplay muted controls loop playsinline preload="metadata"
+            <div style="text-align:center; font-weight:600; margin-bottom:0.4em;">Sol 419</div>
+            <video width=100% height=100% muted controls loop playsinline preload="metadata"
                    style="border-radius:10px;">
-                <source src="results/teaser-2.mp4" type="video/mp4">
+                <source src="results/wheeltracks/sol00419_wheeltracks_slip.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="video_class w-embed">
+            <div style="text-align:center; font-weight:600; margin-bottom:0.4em;">Sol 538</div>
+            <video width=100% height=100% muted controls loop playsinline preload="metadata"
+                   style="border-radius:10px;">
+                <source src="results/wheeltracks/sol00538_wheeltracks_slip.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="video_class w-embed">
+            <div style="text-align:center; font-weight:600; margin-bottom:0.4em;">Sol 838</div>
+            <video width=100% height=100% muted controls loop playsinline preload="metadata"
+                   style="border-radius:10px;">
+                <source src="results/wheeltracks/sol00838_wheeltracks_slip.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="video_class w-embed">
+            <div style="text-align:center; font-weight:600; margin-bottom:0.4em;">Sol 868</div>
+            <video width=100% height=100% muted controls loop playsinline preload="metadata"
+                   style="border-radius:10px;">
+                <source src="results/wheeltracks/sol00868_wheeltracks_slip.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="video_class w-embed">
+            <div style="text-align:center; font-weight:600; margin-bottom:0.4em;">Sol 896</div>
+            <video width=100% height=100% muted controls loop playsinline preload="metadata"
+                   style="border-radius:10px;">
+                <source src="results/wheeltracks/sol00896_wheeltracks_slip.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="video_class w-embed">
+            <div style="text-align:center; font-weight:600; margin-bottom:0.4em;">Sol 1298</div>
+            <video width=100% height=100% muted controls loop playsinline preload="metadata"
+                   style="border-radius:10px;">
+                <source src="results/wheeltracks/sol01298_wheeltracks_slip.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="video_class w-embed">
+            <div style="text-align:center; font-weight:600; margin-bottom:0.4em;">Sol 1326</div>
+            <video width=100% height=100% muted controls loop playsinline preload="metadata"
+                   style="border-radius:10px;">
+                <source src="results/wheeltracks/sol01326_wheeltracks_slip.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="video_class w-embed">
+            <div style="text-align:center; font-weight:600; margin-bottom:0.4em;">Sol 1332</div>
+            <video width=100% height=100% muted controls loop playsinline preload="metadata"
+                   style="border-radius:10px;">
+                <source src="results/wheeltracks/sol01332_wheeltracks_slip.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="video_class w-embed">
+            <div style="text-align:center; font-weight:600; margin-bottom:0.4em;">Sol 1578</div>
+            <video width=100% height=100% muted controls loop playsinline preload="metadata"
+                   style="border-radius:10px;">
+                <source src="results/wheeltracks/sol01578_wheeltracks_slip.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="video_class w-embed">
+            <div style="text-align:center; font-weight:600; margin-bottom:0.4em;">Sol 1590</div>
+            <video width=100% height=100% muted controls loop playsinline preload="metadata"
+                   style="border-radius:10px;">
+                <source src="results/wheeltracks/sol01590_wheeltracks_slip.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="video_class w-embed">
+            <div style="text-align:center; font-weight:600; margin-bottom:0.4em;">Sol 1646</div>
+            <video width=100% height=100% muted controls loop playsinline preload="metadata"
+                   style="border-radius:10px;">
+                <source src="results/wheeltracks/sol01646_wheeltracks_slip.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="video_class w-embed">
+            <div style="text-align:center; font-weight:600; margin-bottom:0.4em;">Sol 1688</div>
+            <video width=100% height=100% muted controls loop playsinline preload="metadata"
+                   style="border-radius:10px;">
+                <source src="results/wheeltracks/sol01688_wheeltracks_slip.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
@@ -173,100 +363,86 @@
     <div style="height: 1.2em"></div>
 
     <!-- ABSTRACT -->
-    <p>
+    <!-- <p>
         Replace this with your paper's abstract. This paragraph sits directly under the
         teaser videos, mirroring the reference template. Keep it to the abstract text —
         method details and results go in the sections below.
-    </p>
+    </p> -->
 </section>
 
 <!-- ============================= OVERVIEW ============================= -->
 <section>
-    <h2>Overview</h2>
+    <h2>Traversability Estimation Framework</h2>
     <div class="small-div"></div>
     <p>
-        A short paragraph describing the setup / problem at a high level. The figure below
-        shows the system overview.
+        Architecture of the traversability model. The dotted region denotes the deployment path. The transformer component is trained through two core loss functions: a contrastive feature ranking noted $\mathcal{L}_{rank}$ and a contrastive multimodal alignment, $\mathcal{L}_{mm}$. $\mathcal{L}_{rank}$ is meant to rank images features based on how well the rover drove over it (measured by slip) and contrasts it from features that were not driven on ($\sim$), such as large boulders. The $\mathcal{L}_{mm}$ then contributes other proprioceptive signals such vehicle tilt, rocker-bogie angles, and acceleration. The final MLP is trained using a pinball loss to generate quantiles of slip prediction. Our final traversability score is generated by taking the $traversability = \max(q_{90} - q_{10},\, q_{50})$, where $q_{50}$ represents the median slip prediction and $q_{90} - q_{10}$ is the prediction uncertainty (predicted slip distribution width).
     </p>
     <!-- Place figures/fig1.png; the id makes it responsive (hides on very small screens). -->
-    <img src="figures/fig1.png" id="tilted-method" alt="Overview figure"/>
+    <img src="figures/method.png" id="tilted-method" alt="Overview figure"/>
 </section>
 
 <div style="height: 0.3em"></div>
 
 <!-- ============================= METHOD ============================= -->
 <section>
-    <h2>Method</h2>
+    <h2>Integration with ENav</h2>
     <div class="small-div"></div>
     <p>
-        Describe your method and contributions here.
+        We integrate the learned traversability score into ENav, the onboard navigation planner,
+        where it augments the geometric cost map used for path selection. This lets the rover
+        account for terrain that is geometrically benign but visually or proprioceptively risky
+        (e.g., loose or slippery surfaces) without changes to the underlying planning pipeline.
     </p>
-    <img src="figures/fig2.png" id="tilted-method" alt="Method figure"/>
+    <img src="figures/software_v4.png" id="tilted-method" alt="Software integration diagram"/>
 </section>
 
 <div style="height: 0.3em"></div>
 
-<!-- ============================= RESULTS (paired video grid) ============================= -->
+<!-- ============================= RESULTS ============================= -->
 <section>
-    <h2>Results</h2>
-
-    <div class="small-div"></div>
-    <div class="row no-gutters">
-        <div class="col">
-            <center><video playsinline autoplay loop muted src="results/result-1.mp4" width="98%"
-                           preload="metadata" style="border-radius:10px;"></video></center>
-        </div>
-        <div class="col">
-            <center><video playsinline autoplay loop muted src="results/result-2.mp4" width="98%"
-                           preload="metadata" style="border-radius:10px;"></video></center>
-        </div>
-    </div>
+    <h2>Predicted Traversability vs. Wheel Track Slip Labels</h2>
     <div class="small-div"></div>
     <p>
-        Caption describing the two videos above.
+        We compare our model's predicted traversability against the rover's actual wheel tracks
+        on Sol 543. The traversability score, $\max(q_{90} - q_{10},\, q_{50})$, combines the
+        median predicted slip with the prediction uncertainty, highlighting regions the model
+        expects to be difficult or unfamiliar to drive over.
     </p>
+    <div class="small-div"></div>
+    <center>
+        <video playsinline autoplay loop muted controls width="98%" preload="metadata"
+               style="border-radius:10px;">
+            <source src="results/sol00543_wheeltracks_vs_max-q50-uncertainty.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </center>
 
     <div class="content-div"></div>
 
-    <h2>Robustness</h2>
-    <div class="small-div"></div>
-    <div class="row no-gutters">
-        <div class="col">
-            <center><video playsinline autoplay loop muted src="results/robust-1.mp4" width="98%"
-                           preload="metadata" style="border-radius:10px;"></video></center>
-        </div>
-        <div class="col">
-            <center><video playsinline autoplay loop muted src="results/robust-2.mp4" width="98%"
-                           preload="metadata" style="border-radius:10px;"></video></center>
-        </div>
-    </div>
+    <h2>Deployment</h2>
     <div class="small-div"></div>
     <p>
-        Caption describing robustness experiments.
+        Our traversability model running during a drive, shown at 8&times; speed with a Navcam
+        inset for context. The predicted traversability map updates as the rover perceives new
+        terrain, guiding path selection in concert with the onboard navigation planner.
     </p>
+    <div class="small-div"></div>
+    <center>
+        <video playsinline autoplay loop muted controls width="98%" preload="metadata"
+               style="border-radius:10px;">
+            <source src="results/learning_to_drive_on_mars__model__navcam_inset__8x.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </center>
 </section>
 
-<!-- ============================= BIBTEX ============================= -->
-<div class="small-div"></div>
-<section>
-    <h2>BibTeX</h2>
-    <div class="small-div"></div>
-    <pre style="font-size: 15px; background-color: #f4f4f4; padding: 1em; border-radius: 8px; overflow-x: auto;">
-@article{chiu2026mars,
-  author  = {Chiu, Darren and Author, Two and Author, Three},
-  title   = {Learning to Drive on Mars},
-  journal = {arXiv:XXXX.XXXXX},
-  year    = {2026}
-}
-    </pre>
-</section>
 
 <!-- ============================= ACKNOWLEDGEMENTS ============================= -->
 <section>
     <h2>Acknowledgements</h2>
     <div class="small-div"></div>
     <p>
-        Acknowledgements go here.
+        This research was carried out at the Jet Propulsion Laboratory (JPL), California Institute of Technology, under a contract with the National Aeronautics and Space Administration (80NM0018D0004). This work was supported by JPL’s Strategic Research and Technology Development (SRTD) program. The High Performance Computing resources used in this investigation were provided by funding from the JPL Enterprise IT Division. The authors would like to thank Tyler Del Sesto and Richard Rieber for their insightful discussions on the hardware platform and ENav algorithm, along with JPL's Rover Operations Center (ROC) for their support. 
     </p>
 </section>
 
